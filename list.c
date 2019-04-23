@@ -51,17 +51,17 @@ unsigned int ListItemCount(const List *plist)
     return count;
 }
 //查询
-List * ListFind(const List *plist)
+Node * ListFind(const List *plist)
 {
     Node * scan = *plist;
-    char input;
+    char input[10];
     puts("请输入姓名信息：");
     scanf("%s",&input);
     while(getchar()!='\n')
     {
         continue;
     }
-    while (scan && strcmp(scan->item.name,input))
+    while (scan!=NULL && strcmp(scan->item.name,input))
     {
         scan=scan->next;
     }
@@ -90,9 +90,9 @@ bool AddItem(Item item,List *plist)
 //修改
 bool ListModify( List *plsit)
 {
-    Node temp1;
+    Node *temp1;
     Item tem_item;
-    temp1 = ListFind(*plsit);
+    temp1 = ListFind(plsit);
     if (temp1 == NULL)
     {
         puts("未找到要修改的联系人！");
@@ -107,7 +107,7 @@ bool ListModify( List *plsit)
         s_gets(temp1->item.sex,6);
         puts("请输入电话号码：");
         s_gets(temp1->item.telephone,11);
-        pus("修改成功！");
+        puts("修改成功！");
     }
     
 }
@@ -116,14 +116,14 @@ void DeleteNode(List *plist)
 {
     Node * temp1;
     Node * temp2 = *plist;
-    temp1=ListFind(*plist);
+    temp1=ListFind(plist);
     if (temp1==NULL)
     {
         puts("没有查询到要删除的联系人信息");
     }
     else
     {
-        while(temp2 && temp->next!=temp1){
+        while(temp2 && temp2->next!=temp1){
             temp2=temp2->next;
         }
         temp2->next=temp1->next;

@@ -9,7 +9,7 @@ char *s_gets(char *st,int n);
 int main(void)
 {
     int option;//用户输入选项
-    int flag1=0，flag2=0;
+    int flag1=0,flag2=0;
     List adress;
     Item temp;
     //初始化
@@ -55,7 +55,7 @@ int main(void)
                         fprintf(stderr,"Problem allocating memory\n");
                         break;
                     }
-                    if (ListIsFull(&movies))
+                    if (ListIsFull(&adress))
                     {
                         puts("The list is now full.\n");
                         break;
@@ -80,26 +80,25 @@ int main(void)
                     puts("通讯作者信息的插入");
                     puts("编号    姓名    性别    电话");
                     puts("请输入编号：");
-                    while (s_gets(temp.number,10)!= NULL)
+                    s_gets(temp.number,10);
+                    
+                    puts("请输入姓名：");
+                    s_gets(temp.name,10);
+                    puts("请输入性别：");
+                    s_gets(temp.sex,6);
+                    puts("请输入电话号码：");
+                    s_gets(temp.telephone,11);
+                    if (AddItem(temp,&adress) == false)
                     {
-                        puts("请输入姓名：");
-                        s_gets(temp.name,10);
-                        puts("请输入性别：");
-                        s_gets(temp.sex,6);
-                        puts("请输入电话号码：");
-                        s_gets(temp.telephone,11);
-                        if (AddItem(temp,&adress) == false)
-                        {
-                            fprintf(stderr,"Problem allocating memory\n");
-                            break;
-                        }
-                        if (ListIsFull(&movies))
-                        {
-                            puts("The list is now full.\n");
-                            break;
-                        }
-
+                        fprintf(stderr,"Problem allocating memory\n");
+                        break;
                     }
+                    if (ListIsFull(&adress))
+                    {
+                        puts("The list is now full.\n");
+                        break;
+                    }
+
 
                 }
                 break;   
@@ -118,11 +117,11 @@ int main(void)
                     if (p_temp!=NULL)
                     {
                         printf("编号： %s\n姓名： %s\n 性别： %s\n联系电话： %s",
-                        p_temp->item.number,p_temp->item.name,p_temp->item.sex,p_temp->item.telephone)
+                        p_temp->item.number,p_temp->item.name,p_temp->item.sex,p_temp->item.telephone);
                     }
                     else
                     {
-                        puts("没有查询到该通讯者！")
+                        puts("没有查询到该通讯者！");
                     }
                 
                 }
@@ -164,7 +163,7 @@ int main(void)
                 else
                 {
                     puts("通讯录列表输出");
-                    Teaverse(&adress,showadress);
+                    Traverse(&adress,showadress);
                 }
                 break;
             }
@@ -185,7 +184,7 @@ int main(void)
                 puts("是否退出？（y/n)");
                 char tem_char;
                 tem_char=getchar();
-                if (tem_char=='y'&&tem_char=='Y')
+                if (tem_char=='y' || tem_char=='Y' )
                 {
                     puts("谢谢使用！");
                     flag2=1;
@@ -194,7 +193,7 @@ int main(void)
             }
             default:
             {
-                puts("输入有错，请重新输入！")
+                puts("输入有错，请重新输入！");
                 break;
             }
             

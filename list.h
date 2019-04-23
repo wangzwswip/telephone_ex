@@ -29,13 +29,13 @@ bool ListModify( List *plsit);
 //确定链表中的项数
 unsigned int  ListItemCount(const List *plist);
 //查询
-List * ListFind(const List *plist);
+Node * ListFind(const List *plist);
 //在链表末尾添加项
 bool AddItem(Item item,List *plist);
 //删除链表中的一项
 void DeleteNode(List *plist);
 //把函数作用于每一项
-void Teaverse(const List *plist,void(*pfun)(Item item));
+void Traverse(const List *plist,void(*pfun)(Item item));
 //释放已分配的内存
 void EmptyTheList(List *plist);
 #endif
